@@ -9,6 +9,7 @@ gem 'faker', '1.1.2'
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
 
+
 group :development, :test do
   gem 'sqlite3', '1.3.9'
   gem 'rspec-rails', '2.13.1'
@@ -25,7 +26,10 @@ group :test do
   gem 'factory_girl_rails', '4.2.0'
   gem 'cucumber-rails', '1.4.0', :require => false
   gem 'database_cleaner', github: 'bmabey/database_cleaner'
-
+  gem 'minitest-reporters', '1.0.5'
+  gem 'mini_backtrace',     '0.1.3'
+  gem 'guard-minitest',     '2.3.1'
+  gem 'test-unit'
   # Uncomment this line on OS X.
   # gem 'growl', '1.0.3'
 
