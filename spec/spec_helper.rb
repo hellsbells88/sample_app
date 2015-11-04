@@ -30,6 +30,23 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
   config.expect_with :rspec do |expectations|
+    
+  
+  config.use_transactional_fixtures = false
+
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do |example|
+    DatabaseCleaner.strategy = example.metadata[:js] ? :truncation : :transaction
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
+
     # This option will default to `true` in RSpec 4. It makes the `description`
     # and `failure_message` of custom matchers include text for helper methods
     # defined using `chain`, e.g.:
@@ -50,7 +67,7 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
     # `true` in RSpec 4.
     mocks.verify_partial_doubles = true
   end
-
+ActiveRecord::Migration.maintain_test_schema!
 config.warnings = false
 
 config.include Rails.application.routes.url_helpers
