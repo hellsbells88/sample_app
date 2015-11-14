@@ -89,20 +89,11 @@ describe "when email is not present" do
     before { @user.save }
     let(:found_user) { User.find_by(email: @user.email) }
     
-
-    describe "with valid password" do
-      it { should eq found_user.authenticate(@user.password) }
-    end
-
-    describe "with invalid password" do
-      let(:user_for_invalid_password) { found_user.authenticate("invalid") }
-
-      it { should_not == user_for_invalid_password }
-      specify { expect(user_for_invalid_password).to be false }
-    end
   end
-  describe "remember token" do
+   
+
+   describe "remember token" do
     before { @user.save }
-    its(:remember_token) { should_not be_blank }
+    it { @user.remember_token.should_not be_blank }
+    end
   end
-end
